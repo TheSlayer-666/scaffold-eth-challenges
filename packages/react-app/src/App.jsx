@@ -9,7 +9,7 @@ import { BrowserRouter, Link, Route, Switch } from "react-router-dom";
 import Web3Modal from "web3modal";
 import "./App.css";
 import { Account, Address, AddressInput, Contract, Faucet, GasGauge, Header, Ramp, ThemeSwitch } from "./components";
-import {INFURA_ID, NETWORK, NETWORKS } from "./constants";
+import { INFURA_ID, NETWORK, NETWORKS } from "./constants";
 import { Transactor } from "./helpers";
 import {
   useBalance,
@@ -19,12 +19,8 @@ import {
   useOnBlock,
   useUserProviderAndSigner,
 } from "eth-hooks";
-import {
-  useEventListener,
-} from "eth-hooks/events/useEventListener";
-import {
-  useExchangeEthPrice,
-} from "eth-hooks/dapps/dex";
+import { useEventListener } from "eth-hooks/events/useEventListener";
+import { useExchangeEthPrice } from "eth-hooks/dapps/dex";
 // import Hints from "./Hints";
 
 const { BufferList } = require("bl");
@@ -32,8 +28,7 @@ const { BufferList } = require("bl");
 const ipfsAPI = require("ipfs-http-client");
 const ipfs = ipfsAPI({ host: "ipfs.infura.io", port: "5001", protocol: "https" });
 
-
-import { useContractConfig } from "./hooks"
+import { useContractConfig } from "./hooks";
 import Portis from "@portis/web3";
 import Fortmatic from "fortmatic";
 import Authereum from "authereum";
@@ -60,7 +55,7 @@ const { ethers } = require("ethers");
 */
 
 /// 📡 What chain are your contracts deployed to?
-const targetNetwork = NETWORKS.localhost; // <------- select your target frontend network (localhost, rinkeby, xdai, mainnet)
+const targetNetwork = NETWORKS.ropsten; // <------- select your target frontend network (localhost, rinkeby, xdai, mainnet)
 
 // 😬 Sorry for all the console logging
 const DEBUG = true;
@@ -109,7 +104,11 @@ if (DEBUG) console.log("📡 Connecting to Mainnet Ethereum");
 const scaffoldEthProvider = navigator.onLine
   ? new ethers.providers.StaticJsonRpcProvider("https://rpc.scaffoldeth.io:48544")
   : null;
-const poktMainnetProvider = navigator.onLine ? new ethers.providers.StaticJsonRpcProvider("https://eth-mainnet.gateway.pokt.network/v1/lb/611156b4a585a20035148406") : null;
+const poktMainnetProvider = navigator.onLine
+  ? new ethers.providers.StaticJsonRpcProvider(
+      "https://eth-mainnet.gateway.pokt.network/v1/lb/611156b4a585a20035148406",
+    )
+  : null;
 const mainnetInfura = navigator.onLine
   ? new ethers.providers.StaticJsonRpcProvider("https://mainnet.infura.io/v3/" + INFURA_ID)
   : null;
@@ -153,7 +152,6 @@ const web3Modal = new Web3Modal({
           100: "https://dai.poa.network", // xDai
         },
       },
-
     },
     portis: {
       display: {
@@ -458,8 +456,6 @@ function App(props) {
       </div>
     );
   }
-
-
 
   const loadWeb3Modal = useCallback(async () => {
     const provider = await web3Modal.connect();

@@ -52,7 +52,7 @@ export default function Curve(props) {
       const plotY = y => {
         return height - ((y - minY) / (maxY - minY)) * height;
       };
-      ctx.strokeStyle = "#000000";
+      ctx.strokeStyle = "#45964C";
       ctx.fillStyle = "#000000";
       ctx.font = textSize + "px Arial";
       // +Y axis
@@ -101,7 +101,7 @@ export default function Curve(props) {
           plotY(props.tokenReserve),
         );
 
-        ctx.fillStyle = "#000000";
+        ctx.fillStyle = "#324A8B";
         ctx.fillText(
           "" + props.addingEth + " ETH input",
           plotX(props.ethReserve) + textSize,
@@ -112,7 +112,7 @@ export default function Curve(props) {
         drawArrow(ctx, plotX(newEthReserve), plotY(props.tokenReserve), plotX(newEthReserve), plotY(k / newEthReserve));
 
         let amountGained = Math.round((10000 * (props.addingEth * props.tokenReserve)) / newEthReserve) / 10000;
-        ctx.fillStyle = "#000000";
+        ctx.fillStyle = "#8A4141";
         ctx.fillText(
           "" + amountGained + " 🎈 output (-0.3% fee)",
           plotX(newEthReserve) + textSize,
